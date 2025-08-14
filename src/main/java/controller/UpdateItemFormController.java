@@ -16,6 +16,9 @@ import java.sql.*;
 public class UpdateItemFormController {
 
     @FXML
+    public JFXButton btnViewAllItems;
+
+    @FXML
     private JFXButton btnAdd;
 
     @FXML
@@ -119,6 +122,18 @@ public class UpdateItemFormController {
         currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/update_choice_form.fxml"))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.show();
+        currentStage.close();
+    }
+
+    @FXML
+    public void btnViewAllItemsOnAction(ActionEvent event) {
+        currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/all_items_table.fxml"))));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
