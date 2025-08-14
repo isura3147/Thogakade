@@ -12,7 +12,7 @@
    <children>
       <TextField fx:id="txtItemCode" layoutX="169.0" layoutY="105.0" prefHeight="26.0" prefWidth="300.0" />
       <TextField fx:id="txtPackSize" layoutX="168.0" layoutY="237.0" prefHeight="26.0" prefWidth="300.0" />
-      <TextField fx:id="txtUnitSize" layoutX="169.0" layoutY="284.0" prefHeight="26.0" prefWidth="300.0" />
+      <TextField fx:id="txtUnitPrice" layoutX="169.0" layoutY="284.0" prefHeight="26.0" prefWidth="300.0" />
       <TextField fx:id="txtQtyOnHand" layoutX="168.0" layoutY="330.0" prefHeight="26.0" prefWidth="300.0" />
       <Label layoutX="292.0" layoutY="24.0" text="UPDATE ITEM">
          <font>
@@ -34,7 +34,7 @@
             <Font name="Sitka Text" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="27.0" layoutY="288.0" prefHeight="18.0" prefWidth="82.0" text="Unit Size">
+      <Label layoutX="27.0" layoutY="288.0" prefHeight="18.0" prefWidth="82.0" text="Unit Price">
          <font>
             <Font name="Sitka Text" size="14.0" />
          </font>

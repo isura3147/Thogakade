@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class UpdateItemFormController {
 
@@ -42,14 +43,75 @@ public class UpdateItemFormController {
     private TextField txtQtyOnHand;
 
     @FXML
-    private TextField txtUnitSize;
+    public TextField txtUnitPrice;
 
     private Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            String SQL = "INSERT INTO items VALUES(?, ?, ?, ?, ?);";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setObject(1, txtItemCode.getText());
+            preparedStatement.setObject(2, txtDescription.getText());
+            preparedStatement.setObject(3, txtPackSize.getText());
+            preparedStatement.setObject(4, Double.parseDouble(txtUnitPrice.getText()));
+            preparedStatement.setObject(5, Integer.parseInt(txtQtyOnHand.getText()));
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @FXML
+    void btnDeleteOnAction(ActionEvent event) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            String SQL = "DELETE FROM items WHERE item_code = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setObject(1, txtItemCode.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void btnUpdateOnAction(ActionEvent event) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            String SQL = "UPDATE items SET description = ?, pack_size = ?, unit_price = ?, quantity_on_hand = ? WHERE item_code = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setObject(1, txtDescription.getText());
+            preparedStatement.setObject(2, txtPackSize.getText());
+            preparedStatement.setObject(3, Double.parseDouble(txtUnitPrice.getText()));
+            preparedStatement.setObject(4, Integer.parseInt(txtQtyOnHand.getText()));
+            preparedStatement.setObject(5, txtItemCode.getText());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @FXML
+    void btnViewOnAction(ActionEvent event) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            String SQL = "SELECT * FROM items WHERE item_code = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setObject(1, txtItemCode.getText());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                txtDescription.setText(resultSet.getString("description"));
+                txtPackSize.setText(resultSet.getString("pack_size"));
+                txtUnitPrice.setText(String.valueOf(resultSet.getDouble("unit_price")));
+                txtQtyOnHand.setText(String.valueOf(resultSet.getInt("quantity_on_hand")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -63,20 +125,4 @@ public class UpdateItemFormController {
         stage.show();
         currentStage.close();
     }
-
-    @FXML
-    void btnDeleteOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnUpdateOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnViewOnAction(ActionEvent event) {
-
-    }
-
 }
