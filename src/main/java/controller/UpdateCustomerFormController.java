@@ -16,6 +16,9 @@ import java.sql.*;
 public class UpdateCustomerFormController {
 
     @FXML
+    public JFXButton btnViewAllCustomers;
+
+    @FXML
     private JFXButton btnAdd;
 
     @FXML
@@ -150,4 +153,15 @@ public class UpdateCustomerFormController {
         currentStage.close();
     }
 
+    @FXML
+    public void btnViewAllCustomersOnAction(ActionEvent event) {
+        currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/all_customers_table.fxml"))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        stage.show();
+        currentStage.close();
+    }
 }
