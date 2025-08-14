@@ -1,0 +1,54 @@
+package controller;
+
+import com.jfoenix.controls.JFXButton;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.sql.*;
+
+public class LoginFormController {
+
+    @FXML
+    private JFXButton btnLogin;
+
+    @FXML
+    private TextField txtPassword;
+
+    @FXML
+    private TextField txtUsername;
+
+    private Stage stage = new Stage();
+
+    @FXML
+    void btnLoginOnAction(ActionEvent event) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            String SQL = "SELECT * FROM admin_info;";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                if (txtUsername.getText().equals(resultSet.getString("name")) && txtPassword.getText().equals(resultSet.getString("password"))) {
+                    try {
+                        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/update_choice_form.fxml"))));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    stage.show();
+                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    stage.close();
+                    break;
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+}
