@@ -46,30 +46,35 @@
       </Label>
       <Line endX="-100.00003051757812" endY="378.8000183105469" layoutX="612.0" layoutY="64.0" startX="-100.00003051757812" startY="13.200004577636719" />
       <Line endX="602.2000732421875" endY="-7.62939453125E-6" layoutX="109.0" layoutY="75.0" startX="-100.0" />
-      <JFXButton fx:id="btnAdd" buttonType="RAISED" layoutX="552.0" layoutY="122.0" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="82.0" text="ADD">
+      <JFXButton fx:id="btnAdd" buttonType="RAISED" layoutX="570.0" layoutY="100.0" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="82.0" text="ADD">
          <font>
             <Font name="XOUMEG S57 Condensed Regular" size="18.0" />
          </font>
       </JFXButton>
       <TextArea fx:id="txtDescription" layoutX="168.0" layoutY="149.0" prefHeight="77.0" prefWidth="300.0" />
-      <JFXButton fx:id="btnView" buttonType="RAISED" layoutX="552.0" layoutY="194.0" onAction="#btnViewOnAction" prefHeight="26.0" prefWidth="82.0" text="VIEW">
+      <JFXButton fx:id="btnView" buttonType="RAISED" layoutX="570.0" layoutY="149.0" onAction="#btnViewOnAction" prefHeight="26.0" prefWidth="82.0" text="VIEW">
          <font>
             <Font name="XOUMEG S57 Condensed Regular" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="552.0" layoutY="261.0" onAction="#btnUpdateOnAction" prefHeight="26.0" prefWidth="82.0" text="UPDATE">
+      <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="570.0" layoutY="201.0" onAction="#btnUpdateOnAction" prefHeight="26.0" prefWidth="82.0" text="UPDATE">
          <font>
             <Font name="XOUMEG S57 Condensed Regular" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="552.0" layoutY="335.0" onAction="#btnDeleteOnAction" prefHeight="26.0" prefWidth="82.0" text="DELETE">
+      <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="570.0" layoutY="250.0" onAction="#btnDeleteOnAction" prefHeight="26.0" prefWidth="82.0" text="DELETE">
          <font>
             <Font name="XOUMEG S57 Condensed Regular" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnBack" layoutX="291.0" layoutY="380.0" onAction="#btnBackOnAction" text="BACK">
+      <JFXButton fx:id="btnBack" layoutX="591.0" layoutY="371.0" onAction="#btnBackOnAction" text="BACK">
          <font>
             <Font name="Yu Gothic UI Semibold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnViewAllItems" buttonType="RAISED" layoutX="538.0" layoutY="297.0" onAction="#btnViewAllItemsOnAction" prefHeight="36.0" prefWidth="146.0" text="VIEW ALL ITEMS">
+         <font>
+            <Font name="XOUMEG S57 Condensed Regular" size="18.0" />
          </font>
       </JFXButton>
    </children>
