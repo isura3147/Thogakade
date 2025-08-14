@@ -143,7 +143,7 @@ public class UpdateCustomerFormController {
 
     @FXML
     void btnBackOnAction(ActionEvent event) {
-        nextStage(event, "view/update_choice_form.fxml");
+        nextStage(event, "/view/update_choice_form.fxml");
     }
 
     @FXML
