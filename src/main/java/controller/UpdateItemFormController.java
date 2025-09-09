@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,7 +55,7 @@ public class UpdateItemFormController {
     @FXML
     void btnAddOnAction(ActionEvent event) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            Connection connection = DBConnection.getInstance().getConnection();
             String SQL = "INSERT INTO items VALUES(?, ?, ?, ?, ?);";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setObject(1, txtItemCode.getText());
@@ -71,7 +72,7 @@ public class UpdateItemFormController {
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            Connection connection = DBConnection.getInstance().getConnection();
             String SQL = "DELETE FROM items WHERE item_code = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setObject(1, txtItemCode.getText());
@@ -84,7 +85,7 @@ public class UpdateItemFormController {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            Connection connection = DBConnection.getInstance().getConnection();
             String SQL = "UPDATE items SET description = ?, pack_size = ?, unit_price = ?, quantity_on_hand = ? WHERE item_code = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setObject(1, txtDescription.getText());
@@ -101,7 +102,7 @@ public class UpdateItemFormController {
     @FXML
     void btnViewOnAction(ActionEvent event) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            Connection connection = DBConnection.getInstance().getConnection();
             String SQL = "SELECT * FROM items WHERE item_code = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setObject(1, txtItemCode.getText());

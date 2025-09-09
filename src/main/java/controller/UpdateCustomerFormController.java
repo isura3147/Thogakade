@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,7 +88,7 @@ public class UpdateCustomerFormController {
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            Connection connection = DBConnection.getInstance().getConnection();
             String SQL = "DELETE FROM customers WHERE customer_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setObject(1, txtId.getText());
@@ -100,7 +101,7 @@ public class UpdateCustomerFormController {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            Connection connection = DBConnection.getInstance().getConnection();
             String SQL = "UPDATE customers SET title = ?, name = ?, date_of_birth = ?, salary = ?, address = ?, city = ?, province = ?, postal_code = ? WHERE customer_id = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setObject(1, txtTitle.getText());
