@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="452.0" prefWidth="725.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UpdateItemFormController">
+<AnchorPane prefHeight="452.0" prefWidth="725.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.itemController.UpdateItemFormController">
    <children>
       <TextField fx:id="txtItemCode" layoutX="169.0" layoutY="105.0" prefHeight="26.0" prefWidth="300.0" />
       <TextField fx:id="txtPackSize" layoutX="168.0" layoutY="237.0" prefHeight="26.0" prefWidth="300.0" />

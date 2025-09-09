@@ -1,7 +1,6 @@
-package controller;
+package controller.customerController;
 
 import com.jfoenix.controls.JFXButton;
-import db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,6 +55,9 @@ public class AllCustomerTableController implements Initializable {
     @FXML
     public TableView<Customer> tblCustomers;
 
+    ObservableList<Customer> customerInfos = FXCollections.observableArrayList();
+    CustomerService customerService = new CustomerController();
+
     private Stage stage = new Stage();
     private Stage currentStage;
 
@@ -71,33 +73,8 @@ public class AllCustomerTableController implements Initializable {
         currentStage.close();
     }
 
-    ObservableList<Customer> customerInfos = FXCollections.observableArrayList();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "SELECT * FROM customers;";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Customer customerInfo = new Customer(
-                        resultSet.getString("customer_id"),
-                        resultSet.getString("title"),
-                        resultSet.getString("name"),
-                        resultSet.getDate("date_of_birth").toLocalDate(),
-                        resultSet.getDouble("salary"),
-                        resultSet.getString("address"),
-                        resultSet.getString("city"),
-                        resultSet.getString("province"),
-                        resultSet.getString("postal_code")
-                );
-                customerInfos.add(customerInfo);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
 
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -108,6 +85,12 @@ public class AllCustomerTableController implements Initializable {
         colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
         colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
         colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
-        tblCustomers.setItems(customerInfos);
+
+        loadCustomerInfo();
+    }
+
+    private void loadCustomerInfo() {
+        customerInfos.clear();
+        tblCustomers.setItems(customerService.loadDetails(customerInfos));
     }
 }

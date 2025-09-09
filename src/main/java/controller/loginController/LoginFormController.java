@@ -1,4 +1,4 @@
-package controller;
+package controller.loginController;
 
 import com.jfoenix.controls.JFXButton;
 import db.DBConnection;
