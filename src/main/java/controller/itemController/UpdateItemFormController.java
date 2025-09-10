@@ -75,10 +75,10 @@ public class UpdateItemFormController {
         ResultSet resultSet = itemService.viewItem(txtItemCode.getText());
         try {
             while(resultSet.next()) {
-                txtDescription.setText(resultSet.getString("description"));
-                txtPackSize.setText(resultSet.getString("pack_size"));
-                txtUnitPrice.setText(String.valueOf(resultSet.getDouble("unit_price")));
-                txtQtyOnHand.setText(String.valueOf(resultSet.getInt("quantity_on_hand")));
+                txtDescription.setText(resultSet.getString("Description"));
+                txtPackSize.setText(resultSet.getString("PackSize"));
+                txtUnitPrice.setText(String.valueOf(resultSet.getDouble("UnitPrice")));
+                txtQtyOnHand.setText(String.valueOf(resultSet.getInt("QtyOnHand")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

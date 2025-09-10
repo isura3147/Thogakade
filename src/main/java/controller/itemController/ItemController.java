@@ -14,17 +14,17 @@ public class ItemController implements ItemService{
     public ObservableList<Item> loadDetails(ObservableList<Item> itemInfos) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "SELECT * FROM items;";
+            String SQL = "SELECT * FROM item;";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 Item itemInfo = new Item(
-                        resultSet.getString("item_code"),
-                        resultSet.getString("description"),
-                        resultSet.getString("pack_size"),
-                        resultSet.getDouble("unit_price"),
-                        resultSet.getInt("quantity_on_hand")
+                        resultSet.getString("ItemCode"),
+                        resultSet.getString("Description"),
+                        resultSet.getString("PackSize"),
+                        resultSet.getDouble("UnitPrice"),
+                        resultSet.getInt("QtyOnHand")
                 );
                 itemInfos.add(itemInfo);
             }
@@ -38,7 +38,7 @@ public class ItemController implements ItemService{
     public void addItem(String itemCode, String description, String packSize, double unitPrice, int qtyOnHand) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "INSERT INTO items VALUES(?, ?, ?, ?, ?);";
+            String SQL = "INSERT INTO item VALUES(?, ?, ?, ?, ?);";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setObject(1, itemCode);
             preparedStatement.setObject(2, description);
@@ -55,7 +55,7 @@ public class ItemController implements ItemService{
     public void deleteItem(String itemCode) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "DELETE FROM items WHERE item_code = ?";
+            String SQL = "DELETE FROM item WHERE ItemCode = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setObject(1, itemCode);
             preparedStatement.executeUpdate();
@@ -68,7 +68,7 @@ public class ItemController implements ItemService{
     public void updateItem(String description, String packSize, double unitPrice, int qtyOnHand, String itemCode) {
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "UPDATE items SET description = ?, pack_size = ?, unit_price = ?, quantity_on_hand = ? WHERE item_code = ?;";
+            String SQL = "UPDATE item SET Description = ?, PackSize = ?, UnitPrice = ?, QtyOnHand = ? WHERE ItemCode = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setObject(1, description);
             preparedStatement.setObject(2, packSize);
@@ -84,7 +84,7 @@ public class ItemController implements ItemService{
     @Override
     public ResultSet viewItem(String itemCode) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-        String SQL = "SELECT * FROM items WHERE item_code = ?;";
+        String SQL = "SELECT * FROM item WHERE ItemCode = ?;";
         PreparedStatement preparedStatement = connection.prepareStatement(SQL);
         preparedStatement.setObject(1, itemCode);
         return preparedStatement.executeQuery();
