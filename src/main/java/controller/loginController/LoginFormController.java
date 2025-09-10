@@ -24,6 +24,7 @@ public class LoginFormController {
     @FXML
     private TextField txtUsername;
 
+    LoginService loginService = new LoginController();
     private Stage stage = new Stage();
 
     @FXML
@@ -31,10 +32,7 @@ public class LoginFormController {
         boolean loginSuccess = false;
 
         try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "SELECT * FROM admin_info;";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = loginService.getUsers();
 
             while (resultSet.next()) {
                 if (txtUsername.getText().equals(resultSet.getString("name")) && txtPassword.getText().equals(resultSet.getString("password"))) {
