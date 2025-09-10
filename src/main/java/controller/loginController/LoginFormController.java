@@ -1,6 +1,7 @@
-package controller;
+package controller.loginController;
 
 import com.jfoenix.controls.JFXButton;
+import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,7 @@ public class LoginFormController {
         boolean loginSuccess = false;
 
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            Connection connection = DBConnection.getInstance().getConnection();
             String SQL = "SELECT * FROM admin_info;";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             ResultSet resultSet = preparedStatement.executeQuery();
