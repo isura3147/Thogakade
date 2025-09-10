@@ -1,7 +1,6 @@
 package controller.itemController;
 
 import com.jfoenix.controls.JFXButton;
-import db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -44,6 +43,9 @@ public class AllItemTableController implements Initializable {
     @FXML
     public TableView<Item> tblItems;
 
+    ObservableList<Item> itemInfos = FXCollections.observableArrayList();
+    ItemService itemService = new ItemController();
+
     private Stage stage = new Stage();
     private Stage currentStage;
 
@@ -59,35 +61,19 @@ public class AllItemTableController implements Initializable {
         currentStage.close();
     }
 
-    ObservableList<Item> itemInfos = FXCollections.observableArrayList();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "SELECT * FROM items;";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Item itemInfo = new Item(
-                        resultSet.getString("item_code"),
-                        resultSet.getString("description"),
-                        resultSet.getString("pack_size"),
-                        resultSet.getDouble("unit_price"),
-                        resultSet.getInt("quantity_on_hand")
-                );
-                itemInfos.add(itemInfo);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
         colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colPackSize.setCellValueFactory(new PropertyValueFactory<>("packSize"));
         colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
         colQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("qtyOnHand"));
-        tblItems.setItems(itemInfos);
+
+        loadItemInfo();
+    }
+
+    private void loadItemInfo() {
+        itemInfos.clear();
+        tblItems.setItems(itemService.loadDetails(itemInfos));
     }
 }

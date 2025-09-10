@@ -49,64 +49,31 @@ public class UpdateItemFormController {
     @FXML
     public TextField txtUnitPrice;
 
+    ItemService itemService = new ItemController();
     private Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "INSERT INTO items VALUES(?, ?, ?, ?, ?);";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setObject(1, txtItemCode.getText());
-            preparedStatement.setObject(2, txtDescription.getText());
-            preparedStatement.setObject(3, txtPackSize.getText());
-            preparedStatement.setObject(4, Double.parseDouble(txtUnitPrice.getText()));
-            preparedStatement.setObject(5, Integer.parseInt(txtQtyOnHand.getText()));
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        itemService.addItem(txtItemCode.getText(), txtDescription.getText(), txtPackSize.getText(),
+                            Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQtyOnHand.getText()));
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "DELETE FROM items WHERE item_code = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setObject(1, txtItemCode.getText());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        itemService.deleteItem(txtItemCode.getText());
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "UPDATE items SET description = ?, pack_size = ?, unit_price = ?, quantity_on_hand = ? WHERE item_code = ?;";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setObject(1, txtDescription.getText());
-            preparedStatement.setObject(2, txtPackSize.getText());
-            preparedStatement.setObject(3, Double.parseDouble(txtUnitPrice.getText()));
-            preparedStatement.setObject(4, Integer.parseInt(txtQtyOnHand.getText()));
-            preparedStatement.setObject(5, txtItemCode.getText());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        itemService.updateItem(txtDescription.getText(), txtPackSize.getText(), Double.parseDouble(txtUnitPrice.getText()),
+                                Integer.parseInt(txtQtyOnHand.getText()), txtItemCode.getText());
     }
 
     @FXML
-    void btnViewOnAction(ActionEvent event) {
+    void btnViewOnAction(ActionEvent event) throws SQLException {
+        ResultSet resultSet = itemService.viewItem(txtItemCode.getText());
         try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "SELECT * FROM items WHERE item_code = ?;";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setObject(1, txtItemCode.getText());
-            ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
                 txtDescription.setText(resultSet.getString("description"));
                 txtPackSize.setText(resultSet.getString("pack_size"));

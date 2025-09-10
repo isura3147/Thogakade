@@ -43,7 +43,23 @@ public class CustomerController implements CustomerService {
 
     @Override
     public void updateCustomer(String id, String title, String name, String DOB, double salary, String address, String city, String province, String postalCode) {
-
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            String SQL = "UPDATE customers SET title = ?, name = ?, date_of_birth = ?, salary = ?, address = ?, city = ?, province = ?, postal_code = ? WHERE customer_id = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setObject(1, title);
+            preparedStatement.setObject(2, name);
+            preparedStatement.setObject(3, DOB);
+            preparedStatement.setObject(4, salary);
+            preparedStatement.setObject(5, address);
+            preparedStatement.setObject(6, city);
+            preparedStatement.setObject(7, province);
+            preparedStatement.setObject(8, postalCode);
+            preparedStatement.setObject(9, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
