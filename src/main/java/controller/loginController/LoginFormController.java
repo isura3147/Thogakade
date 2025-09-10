@@ -1,6 +1,7 @@
-package controller;
+package controller.loginController;
 
 import com.jfoenix.controls.JFXButton;
+import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,8 +28,10 @@ public class LoginFormController {
 
     @FXML
     void btnLoginOnAction(ActionEvent event) {
+        boolean loginSuccess = false;
+
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/thogakade", "root", "isura1234");
+            Connection connection = DBConnection.getInstance().getConnection();
             String SQL = "SELECT * FROM admin_info;";
             PreparedStatement preparedStatement = connection.prepareStatement(SQL);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -43,9 +46,19 @@ public class LoginFormController {
                     stage.show();
                     stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                     stage.close();
+                    loginSuccess = true;
                     break;
                 }
             }
+            if (!loginSuccess) {
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/notification_ui.fxml"))));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage.show();
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
