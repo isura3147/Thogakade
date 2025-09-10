@@ -40,7 +40,7 @@ public class UpdateChoiceFormController {
     }
 
     private void nextStage(ActionEvent event, String path) {
-        currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(path))));
         } catch (IOException e) {

@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginController implements LoginService{
+public class LoginController implements LoginService {
     @Override
     public ResultSet getUsers() throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();

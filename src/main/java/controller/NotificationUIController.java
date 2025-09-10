@@ -13,7 +13,7 @@ public class NotificationUIController {
 
     @FXML
     void btnOkOnAction(ActionEvent event) {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
 
