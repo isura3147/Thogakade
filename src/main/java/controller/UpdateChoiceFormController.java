@@ -39,6 +39,16 @@ public class UpdateChoiceFormController {
         nextStage(event, "/view/update_item_form.fxml");
     }
 
+    @FXML
+    void btnUpdateOrderDetailOnAction(ActionEvent event) {
+        nextStage(event, "/view/order_detail_form.fxml");
+    }
+
+    @FXML
+    void btnUpdateOrdersOnAction(ActionEvent event) {
+        //
+    }
+
     private void nextStage(ActionEvent event, String path) {
         currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
@@ -49,5 +59,4 @@ public class UpdateChoiceFormController {
         stage.show();
         currentStage.close();
     }
-
 }
