@@ -1,7 +1,6 @@
 package controller.itemController;
 
 import com.jfoenix.controls.JFXButton;
-import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,45 +17,24 @@ public class UpdateItemFormController {
 
     @FXML
     public JFXButton btnViewAllItems;
-
-    @FXML
-    private JFXButton btnAdd;
-
-    @FXML
-    private JFXButton btnBack;
-
-    @FXML
-    private JFXButton btnDelete;
-
-    @FXML
-    private JFXButton btnUpdate;
-
-    @FXML
-    private JFXButton btnView;
-
-    @FXML
-    private TextArea txtDescription;
-
-    @FXML
-    private TextField txtItemCode;
-
-    @FXML
-    private TextField txtPackSize;
-
-    @FXML
-    private TextField txtQtyOnHand;
-
     @FXML
     public TextField txtUnitPrice;
-
     ItemService itemService = new ItemController();
+    @FXML
+    private TextArea txtDescription;
+    @FXML
+    private TextField txtItemCode;
+    @FXML
+    private TextField txtPackSize;
+    @FXML
+    private TextField txtQtyOnHand;
     private Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
         itemService.addItem(txtItemCode.getText(), txtDescription.getText(), txtPackSize.getText(),
-                            Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQtyOnHand.getText()));
+                Double.parseDouble(txtUnitPrice.getText()), Integer.parseInt(txtQtyOnHand.getText()));
     }
 
     @FXML
@@ -67,18 +45,18 @@ public class UpdateItemFormController {
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
         itemService.updateItem(txtDescription.getText(), txtPackSize.getText(), Double.parseDouble(txtUnitPrice.getText()),
-                                Integer.parseInt(txtQtyOnHand.getText()), txtItemCode.getText());
+                Integer.parseInt(txtQtyOnHand.getText()), txtItemCode.getText());
     }
 
     @FXML
     void btnViewOnAction(ActionEvent event) throws SQLException {
         ResultSet resultSet = itemService.viewItem(txtItemCode.getText());
         try {
-            while(resultSet.next()) {
-                txtDescription.setText(resultSet.getString("description"));
-                txtPackSize.setText(resultSet.getString("pack_size"));
-                txtUnitPrice.setText(String.valueOf(resultSet.getDouble("unit_price")));
-                txtQtyOnHand.setText(String.valueOf(resultSet.getInt("quantity_on_hand")));
+            while (resultSet.next()) {
+                txtDescription.setText(resultSet.getString("Description"));
+                txtPackSize.setText(resultSet.getString("PackSize"));
+                txtUnitPrice.setText(String.valueOf(resultSet.getDouble("UnitPrice")));
+                txtQtyOnHand.setText(String.valueOf(resultSet.getInt("QtyOnHand")));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -96,7 +74,7 @@ public class UpdateItemFormController {
     }
 
     private void nextStage(ActionEvent event, String path) {
-        currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(path))));
         } catch (IOException e) {

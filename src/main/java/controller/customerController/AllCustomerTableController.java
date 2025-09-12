@@ -1,6 +1,5 @@
 package controller.customerController;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,48 +21,35 @@ import java.util.ResourceBundle;
 
 public class AllCustomerTableController implements Initializable {
 
-    @FXML
-    private JFXButton btnBack;
-
-    @FXML
-    private TableColumn<?, ?> colAddress;
-
-    @FXML
-    private TableColumn<?, ?> colCity;
-
-    @FXML
-    private TableColumn<?, ?> colDOB;
-
-    @FXML
-    private TableColumn<?, ?> colId;
-
-    @FXML
-    private TableColumn<?, ?> colName;
-
-    @FXML
-    private TableColumn<?, ?> colPostalCode;
-
-    @FXML
-    private TableColumn<?, ?> colProvince;
-
-    @FXML
-    private TableColumn<?, ?> colSalary;
-
-    @FXML
-    private TableColumn<?, ?> colTitle;
 
     @FXML
     public TableView<Customer> tblCustomers;
-
     ObservableList<Customer> customerInfos = FXCollections.observableArrayList();
     CustomerService customerService = new CustomerController();
-
+    @FXML
+    private TableColumn<?, ?> colAddress;
+    @FXML
+    private TableColumn<?, ?> colCity;
+    @FXML
+    private TableColumn<?, ?> colDOB;
+    @FXML
+    private TableColumn<?, ?> colId;
+    @FXML
+    private TableColumn<?, ?> colName;
+    @FXML
+    private TableColumn<?, ?> colPostalCode;
+    @FXML
+    private TableColumn<?, ?> colProvince;
+    @FXML
+    private TableColumn<?, ?> colSalary;
+    @FXML
+    private TableColumn<?, ?> colTitle;
     private Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML
     void btnBackOnAction(ActionEvent event) {
-        currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/update_customer_form.fxml"))));
         } catch (IOException e) {

@@ -1,6 +1,5 @@
 package controller;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,15 +10,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class UpdateChoiceFormController {
-
-    @FXML
-    private JFXButton btnBack;
-
-    @FXML
-    private JFXButton btnUpdateCustomer;
-
-    @FXML
-    private JFXButton btnUpdateItem;
 
     private Stage stage = new Stage();
     private Stage currentStage;
@@ -39,8 +29,18 @@ public class UpdateChoiceFormController {
         nextStage(event, "/view/update_item_form.fxml");
     }
 
+    @FXML
+    void btnUpdateOrderDetailOnAction(ActionEvent event) {
+        nextStage(event, "/view/order_detail_form.fxml");
+    }
+
+    @FXML
+    void btnUpdateOrdersOnAction(ActionEvent event) {
+        nextStage(event, "/view/orders_form.fxml");
+    }
+
     private void nextStage(ActionEvent event, String path) {
-        currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(path))));
         } catch (IOException e) {
@@ -49,5 +49,4 @@ public class UpdateChoiceFormController {
         stage.show();
         currentStage.close();
     }
-
 }
