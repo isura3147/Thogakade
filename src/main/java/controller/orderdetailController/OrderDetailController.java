@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderDetailController implements OrderDetailService{
+public class OrderDetailController implements OrderDetailService {
     @Override
     public ObservableList<OrderDetail> loadDetails(ObservableList<OrderDetail> orderDetailInfos) {
         try {
@@ -42,8 +42,7 @@ public class OrderDetailController implements OrderDetailService{
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getString("Description");
-            }
-            else {
+            } else {
                 return null;
             }
         } catch (SQLException e) {

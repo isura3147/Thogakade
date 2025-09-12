@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ItemController implements ItemService{
+public class ItemController implements ItemService {
     @Override
     public ObservableList<Item> loadDetails(ObservableList<Item> itemInfos) {
         try {
