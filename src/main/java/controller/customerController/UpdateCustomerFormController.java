@@ -75,14 +75,14 @@ public class UpdateCustomerFormController {
         ResultSet resultSet = customerService.viewCustomer(txtId.getText());
 
         while (resultSet.next()) {
-            txtTitle.setText(resultSet.getString("title"));
-            txtName.setText(resultSet.getString("name"));
-            txtDOB.setValue(resultSet.getDate("date_of_birth").toLocalDate());
+            txtTitle.setText(resultSet.getString("CustTitle"));
+            txtName.setText(resultSet.getString("CustName"));
+            txtDOB.setValue(resultSet.getDate("DOB").toLocalDate());
             txtSalary.setText(String.valueOf(resultSet.getDouble("salary")));
-            txtAddress.setText(resultSet.getString("address"));
-            txtCity.setText(resultSet.getString("city"));
-            txtProvince.setText(resultSet.getString("province"));
-            txtPostalCode.setText(resultSet.getString("postal_code"));
+            txtAddress.setText(resultSet.getString("CustAddress"));
+            txtCity.setText(resultSet.getString("City"));
+            txtProvince.setText(resultSet.getString("Province"));
+            txtPostalCode.setText(resultSet.getString("PostalCode"));
         }
     }
 

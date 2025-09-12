@@ -1,7 +1,6 @@
 package controller.loginController;
 
 import com.jfoenix.controls.JFXButton;
-import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,15 +14,13 @@ import java.sql.*;
 
 public class LoginFormController {
 
+    LoginService loginService = new LoginController();
     @FXML
     private JFXButton btnLogin;
-
     @FXML
     private TextField txtPassword;
-
     @FXML
     private TextField txtUsername;
-
     private Stage stage = new Stage();
 
     @FXML
@@ -31,10 +28,7 @@ public class LoginFormController {
         boolean loginSuccess = false;
 
         try {
-            Connection connection = DBConnection.getInstance().getConnection();
-            String SQL = "SELECT * FROM admin_info;";
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = loginService.getUsers();
 
             while (resultSet.next()) {
                 if (txtUsername.getText().equals(resultSet.getString("name")) && txtPassword.getText().equals(resultSet.getString("password"))) {
@@ -44,7 +38,7 @@ public class LoginFormController {
                         throw new RuntimeException(e);
                     }
                     stage.show();
-                    stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.close();
                     loginSuccess = true;
                     break;
