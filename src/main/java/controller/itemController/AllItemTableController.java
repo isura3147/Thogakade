@@ -1,6 +1,5 @@
 package controller.itemController;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,35 +22,25 @@ import java.util.ResourceBundle;
 public class AllItemTableController implements Initializable {
 
     @FXML
-    private JFXButton btnBack;
-
-    @FXML
-    private TableColumn<?, ?> colDescription;
-
-    @FXML
-    private TableColumn<?, ?> colItemCode;
-
-    @FXML
-    private TableColumn<?, ?> colPackSize;
-
-    @FXML
-    private TableColumn<?, ?> colUnitPrice;
-
-    @FXML
-    private TableColumn<?, ?> colQtyOnHand;
-
-    @FXML
     public TableView<Item> tblItems;
-
     ObservableList<Item> itemInfos = FXCollections.observableArrayList();
     ItemService itemService = new ItemController();
-
+    @FXML
+    private TableColumn<?, ?> colDescription;
+    @FXML
+    private TableColumn<?, ?> colItemCode;
+    @FXML
+    private TableColumn<?, ?> colPackSize;
+    @FXML
+    private TableColumn<?, ?> colUnitPrice;
+    @FXML
+    private TableColumn<?, ?> colQtyOnHand;
     private Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML
     void btnBackOnAction(ActionEvent event) {
-        currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/update_item_form.fxml"))));
         } catch (IOException e) {

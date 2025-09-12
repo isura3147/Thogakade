@@ -1,6 +1,5 @@
 package controller;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,15 +10,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class UpdateChoiceFormController {
-
-    @FXML
-    private JFXButton btnBack;
-
-    @FXML
-    private JFXButton btnUpdateCustomer;
-
-    @FXML
-    private JFXButton btnUpdateItem;
 
     private Stage stage = new Stage();
     private Stage currentStage;
@@ -46,7 +36,7 @@ public class UpdateChoiceFormController {
 
     @FXML
     void btnUpdateOrdersOnAction(ActionEvent event) {
-        //
+        nextStage(event, "/view/orders_form.fxml");
     }
 
     private void nextStage(ActionEvent event, String path) {

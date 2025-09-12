@@ -1,6 +1,5 @@
 package controller.loginController;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +14,6 @@ import java.sql.*;
 public class LoginFormController {
 
     LoginService loginService = new LoginController();
-    @FXML
-    private JFXButton btnLogin;
     @FXML
     private TextField txtPassword;
     @FXML

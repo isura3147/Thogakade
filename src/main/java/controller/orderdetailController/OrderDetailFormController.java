@@ -1,6 +1,5 @@
 package controller.orderdetailController;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -22,42 +21,28 @@ import java.util.ResourceBundle;
 
 public class OrderDetailFormController implements Initializable {
 
-    @FXML
-    private JFXButton btnBack;
-
-    @FXML
-    private TableColumn<?, ?> colDiscount;
-
-    @FXML
-    private TableColumn<?, ?> colItemCode;
-
-    @FXML
-    private TableColumn<?, ?> colOrderId;
-
-    @FXML
-    private TableColumn<?, ?> colOrderQty;
-
-    @FXML
-    private TableView<OrderDetail> tblOrderDetail;
-
-    @FXML
-    private TextField txtDescription;
-
-    @FXML
-    private TextField txtDiscount;
-
-    @FXML
-    private TextField txtItemCode;
-
-    @FXML
-    private TextField txtOrderId;
-
-    @FXML
-    private TextField txtOrderQty;
-
     ObservableList<OrderDetail> orderDetailInfos = FXCollections.observableArrayList();
     OrderDetailService orderDetailService = new OrderDetailController();
-
+    @FXML
+    private TableColumn<?, ?> colDiscount;
+    @FXML
+    private TableColumn<?, ?> colItemCode;
+    @FXML
+    private TableColumn<?, ?> colOrderId;
+    @FXML
+    private TableColumn<?, ?> colOrderQty;
+    @FXML
+    private TableView<OrderDetail> tblOrderDetail;
+    @FXML
+    private TextField txtDescription;
+    @FXML
+    private TextField txtDiscount;
+    @FXML
+    private TextField txtItemCode;
+    @FXML
+    private TextField txtOrderId;
+    @FXML
+    private TextField txtOrderQty;
     private Stage stage = new Stage();
     private Stage currentStage;
 
@@ -92,12 +77,16 @@ public class OrderDetailFormController implements Initializable {
 
     @FXML
     public void btnClearOnAction(ActionEvent event) {
-        clearDetails();
+        txtItemCode.setText("");
+        txtDescription.setText("");
+        txtDiscount.setText("");
+        txtOrderId.setText("");
+        txtOrderQty.setText("");
     }
 
     @FXML
     void btnBackOnAction(ActionEvent event) {
-        currentStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/update_choice_form.fxml"))));
         } catch (IOException e) {
@@ -113,11 +102,4 @@ public class OrderDetailFormController implements Initializable {
         loadOrderDetailInfo();
     }
 
-    private void clearDetails() {
-        txtItemCode.setText("");
-        txtDescription.setText("");
-        txtDiscount.setText("");
-        txtOrderId.setText("");
-        txtOrderQty.setText("");
-    }
 }

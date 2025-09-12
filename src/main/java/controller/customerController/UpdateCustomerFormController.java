@@ -1,7 +1,6 @@
 package controller.customerController;
 
 import com.jfoenix.controls.JFXButton;
-import db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,16 +21,6 @@ public class UpdateCustomerFormController {
     public TextField txtPostalCode;
     CustomerService customerService = new CustomerController();
     @FXML
-    private JFXButton btnAdd;
-    @FXML
-    private JFXButton btnBack;
-    @FXML
-    private JFXButton btnDelete;
-    @FXML
-    private JFXButton btnUpdate;
-    @FXML
-    private JFXButton btnView;
-    @FXML
     private TextField txtAddress;
     @FXML
     private TextField txtCity;
@@ -47,6 +36,7 @@ public class UpdateCustomerFormController {
     private TextField txtSalary;
     @FXML
     private TextField txtTitle;
+
     private Stage stage = new Stage();
     private Stage currentStage;
 
