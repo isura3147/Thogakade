@@ -11,7 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UpdateItemFormController {
 
@@ -28,7 +29,7 @@ public class UpdateItemFormController {
     private TextField txtPackSize;
     @FXML
     private TextField txtQtyOnHand;
-    private Stage stage = new Stage();
+    private final Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML

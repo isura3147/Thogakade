@@ -16,7 +16,6 @@ import model.Customer;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
 import java.util.ResourceBundle;
 
 public class AllCustomerTableController implements Initializable {
@@ -44,7 +43,7 @@ public class AllCustomerTableController implements Initializable {
     private TableColumn<?, ?> colSalary;
     @FXML
     private TableColumn<?, ?> colTitle;
-    private Stage stage = new Stage();
+    private final Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML
