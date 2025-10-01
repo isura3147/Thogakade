@@ -1,25 +1,33 @@
 package controller.customerController;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Customer;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class UpdateCustomerFormController {
+public class UpdateCustomerFormController implements Initializable {
 
-    @FXML
-    public JFXButton btnViewAllCustomers;
     @FXML
     public TextField txtPostalCode;
+    ObservableList<Customer> customerInfos = FXCollections.observableArrayList();
     CustomerService customerService = new CustomerController();
     @FXML
     private TextField txtAddress;
@@ -37,6 +45,26 @@ public class UpdateCustomerFormController {
     private TextField txtSalary;
     @FXML
     private TextField txtTitle;
+    @FXML
+    public TableView<Customer> tblCustomers;
+    @FXML
+    private TableColumn<?, ?> colAddress;
+    @FXML
+    private TableColumn<?, ?> colCity;
+    @FXML
+    private TableColumn<?, ?> colDOB;
+    @FXML
+    private TableColumn<?, ?> colId;
+    @FXML
+    private TableColumn<?, ?> colName;
+    @FXML
+    private TableColumn<?, ?> colPostalCode;
+    @FXML
+    private TableColumn<?, ?> colProvince;
+    @FXML
+    private TableColumn<?, ?> colSalary;
+    @FXML
+    private TableColumn<?, ?> colTitle;
 
     private final Stage stage = new Stage();
     private Stage currentStage;
@@ -46,11 +74,14 @@ public class UpdateCustomerFormController {
         customerService.addCustomer(txtId.getText(), txtTitle.getText(), txtName.getText(), String.valueOf(txtDOB.getValue()),
                 Double.parseDouble(txtSalary.getText()), txtAddress.getText(), txtCity.getText(),
                 txtProvince.getText(), txtPostalCode.getText());
+
+        loadCustomerInfo();
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
         customerService.deleteCustomer(txtId.getText());
+        loadCustomerInfo();
     }
 
     @FXML
@@ -58,6 +89,8 @@ public class UpdateCustomerFormController {
         customerService.updateCustomer(txtId.getText(), txtTitle.getText(), txtName.getText(), String.valueOf(txtDOB.getValue()),
                 Double.parseDouble(txtSalary.getText()), txtAddress.getText(), txtCity.getText(),
                 txtProvince.getText(), txtPostalCode.getText());
+
+        loadCustomerInfo();
     }
 
     @FXML
@@ -82,10 +115,6 @@ public class UpdateCustomerFormController {
         nextStage(event, "/view/update_choice_form.fxml");
     }
 
-    @FXML
-    public void btnViewAllCustomersOnAction(ActionEvent event) {
-        nextStage(event, "/view/all_customers_table.fxml");
-    }
 
     private void nextStage(ActionEvent event, String path) {
         currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -96,5 +125,40 @@ public class UpdateCustomerFormController {
         }
         stage.show();
         currentStage.close();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colDOB.setCellValueFactory(new PropertyValueFactory<>("dob"));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        colProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
+        colPostalCode.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
+
+        loadCustomerInfo();
+
+        tblCustomers.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (newValue != null) {
+                txtId.setText(newValue.getId());
+                txtTitle.setText(newValue.getTitle());
+                txtName.setText(newValue.getName());
+                txtDOB.setValue(newValue.getDob());
+                txtSalary.setText(String.valueOf(newValue.getSalary()));
+                txtAddress.setText(newValue.getAddress());
+                txtCity.setText(newValue.getCity());
+                txtProvince.setText(newValue.getProvince());
+                txtPostalCode.setText(newValue.getPostalCode());
+            }
+        }));
+
+    }
+
+    private void loadCustomerInfo() {
+        customerInfos.clear();
+        tblCustomers.setItems(customerService.loadDetails(customerInfos));
     }
 }
