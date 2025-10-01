@@ -40,7 +40,7 @@ public class OrdersFormController implements Initializable {
     private TextField txtOrderId;
     @FXML
     private TextField txtCustomerName;
-    private Stage stage = new Stage();
+    private final Stage stage = new Stage();
     private Stage currentStage;
 
 

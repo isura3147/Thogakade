@@ -16,7 +16,6 @@ import model.Item;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
 import java.util.ResourceBundle;
 
 public class AllItemTableController implements Initializable {
@@ -35,7 +34,7 @@ public class AllItemTableController implements Initializable {
     private TableColumn<?, ?> colUnitPrice;
     @FXML
     private TableColumn<?, ?> colQtyOnHand;
-    private Stage stage = new Stage();
+    private final Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML
