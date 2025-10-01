@@ -1,6 +1,5 @@
 package controller.customerController;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,8 +24,11 @@ import java.util.ResourceBundle;
 
 public class UpdateCustomerFormController implements Initializable {
 
+    private final Stage stage = new Stage();
     @FXML
     public TextField txtPostalCode;
+    @FXML
+    public TableView<Customer> tblCustomers;
     ObservableList<Customer> customerInfos = FXCollections.observableArrayList();
     CustomerService customerService = new CustomerController();
     @FXML
@@ -46,8 +48,6 @@ public class UpdateCustomerFormController implements Initializable {
     @FXML
     private TextField txtTitle;
     @FXML
-    public TableView<Customer> tblCustomers;
-    @FXML
     private TableColumn<?, ?> colAddress;
     @FXML
     private TableColumn<?, ?> colCity;
@@ -65,8 +65,6 @@ public class UpdateCustomerFormController implements Initializable {
     private TableColumn<?, ?> colSalary;
     @FXML
     private TableColumn<?, ?> colTitle;
-
-    private final Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML

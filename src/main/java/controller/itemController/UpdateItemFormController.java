@@ -25,8 +25,11 @@ import java.util.ResourceBundle;
 public class UpdateItemFormController implements Initializable {
 
 
+    private final Stage stage = new Stage();
     @FXML
     public TextField txtUnitPrice;
+    @FXML
+    public TableView<Item> tblItems;
     ItemService itemService = new ItemController();
     ObservableList<Item> itemInfos = FXCollections.observableArrayList();
     @FXML
@@ -38,8 +41,6 @@ public class UpdateItemFormController implements Initializable {
     @FXML
     private TextField txtQtyOnHand;
     @FXML
-    public TableView<Item> tblItems;
-    @FXML
     private TableColumn<?, ?> colDescription;
     @FXML
     private TableColumn<?, ?> colItemCode;
@@ -49,7 +50,6 @@ public class UpdateItemFormController implements Initializable {
     private TableColumn<?, ?> colUnitPrice;
     @FXML
     private TableColumn<?, ?> colQtyOnHand;
-    private final Stage stage = new Stage();
     private Stage currentStage;
 
     @FXML
@@ -93,7 +93,6 @@ public class UpdateItemFormController implements Initializable {
     void btnBackOnAction(ActionEvent event) {
         nextStage(event, "/view/update_choice_form.fxml");
     }
-
 
 
     private void nextStage(ActionEvent event, String path) {

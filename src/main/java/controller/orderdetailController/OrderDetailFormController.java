@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class OrderDetailFormController implements Initializable {
 
+    private final Stage stage = new Stage();
     ObservableList<OrderDetail> orderDetailInfos = FXCollections.observableArrayList();
     OrderDetailService orderDetailService = new OrderDetailController();
     @FXML
@@ -43,7 +44,6 @@ public class OrderDetailFormController implements Initializable {
     private TextField txtOrderId;
     @FXML
     private TextField txtOrderQty;
-    private final Stage stage = new Stage();
     private Stage currentStage;
 
     @Override
